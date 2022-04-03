@@ -64,14 +64,8 @@ typings/
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 
-# next.js build output
-.next
-
-# nuxt.js build output
-.nuxt
-
-# vuepress build output
-.vuepress/dist
+# Typescript build file
+build/
 
 # Serverless directories
 .serverless/
