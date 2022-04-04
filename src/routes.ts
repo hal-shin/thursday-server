@@ -1,10 +1,8 @@
 import { FastifyInstance } from "fastify";
-import { usersFeature } from "./features/users/index.js";
+import { userRoutes } from "./routes/users.js";
+import { authRoutes } from "./routes/auth.js";
 
 export const registerFeatures = async (fastify: FastifyInstance) => {
-  const features = [usersFeature];
-
-  for (const feature of features) {
-    await feature(fastify);
-  }
+  fastify.register(userRoutes, { prefix: "/users" });
+  fastify.register(authRoutes, { prefix: "/auth" });
 };

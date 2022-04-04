@@ -1,6 +1,9 @@
 import fastify from "fastify";
 import config from "./plugins/config.js";
 import { registerFeatures } from "./routes.js";
+import db from "./plugins/db.js";
+import swagger from "./plugins/swagger.js";
+import cors from "./plugins/cors.js";
 
 const server = fastify({
   logger: {
@@ -8,10 +11,20 @@ const server = fastify({
   },
 });
 
+// Register plugins
 await server.register(config);
+await server.register(cors);
+await server.register(db);
+await server.register(swagger);
+
 await registerFeatures(server);
 
 await server.ready();
+
+server.ready((err) => {
+  if (err) throw err;
+  server.swagger();
+});
 
 export default server;
 
